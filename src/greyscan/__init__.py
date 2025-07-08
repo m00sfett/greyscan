@@ -1,5 +1,7 @@
 """Gray Bar Scanner package."""
 
+__version__ = "0.0.1"
+
 __all__ = [
     "batch_scan_images",
     "scan_image_for_gray_bands",

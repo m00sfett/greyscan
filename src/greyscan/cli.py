@@ -1,10 +1,13 @@
 import argparse
 from datetime import datetime
 
+from . import __version__
+
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Scan images for gray bars")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     parser.add_argument("path", help="Path to folder containing images")
     parser.add_argument(
         "--band-height",
@@ -48,6 +51,8 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv=None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+
+    print(f"Greyscan {__version__}\n")
 
     if args.verbose:
         print(f"Starting scan in '{args.path}'...\n")
