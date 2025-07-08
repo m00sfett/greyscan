@@ -1,26 +1,26 @@
-# Graubalken-Scanner für Bilddateien
+# Gray Bar Scanner for Image Files
 
-Ein CLI-basiertes Python-Tool zum automatisierten Erkennen beschädigter Bilder, insbesondere solcher mit grauen Balken oder Flächen durch unvollständige Dateiübertragungen. Es ist für große Mengen an Bildern in tief verschachtelten Ordnerstrukturen optimiert und prüft jedes Bild auf charakteristische visuelle Defekte.
-
----
-
-## 🔍 Funktionsweise
-
-Das Skript analysiert Bilder in horizontalen Streifen (Bändern) und erkennt sogenannte „graue Balken“, die typischerweise durch beschädigte oder abgeschnittene Daten entstehen. Verdächtige Bilder werden mit Dateipfad und Position der Auffälligkeit in eine Log-Datei geschrieben.
+A CLI-based Python tool to automatically detect corrupted images, especially those with gray bars or areas caused by incomplete file transfers. It is optimized for large collections of images in deeply nested folder structures and checks each image for characteristic visual defects.
 
 ---
 
-## ✅ Erkennungslogik
+## 🔍 How It Works
 
-Ein Band (z. B. 20 Pixel hoch) wird als verdächtig eingestuft, wenn:
-- die Helligkeit innerhalb des Bandes **wenig variiert** (Standardabweichung unter Grenzwert)
-- der Durchschnittswert **im mittleren Helligkeitsbereich** liegt (kein Schwarz, kein Weiß)
+The script analyzes images in horizontal strips (bands) and detects so-called "gray bars" that typically occur due to corrupted or truncated data. Suspicious images are written to a log file with their path and the position of the anomaly.
 
 ---
 
-## 📦 Voraussetzungen
+## ✅ Detection Logic
 
-Installiere die Abhängigkeiten:
+A band (e.g. 20 pixels high) is considered suspicious when:
+- the brightness within the band **varies little** (standard deviation below a threshold)
+- the average value is **in the mid brightness range** (neither black nor white)
+
+---
+
+## 📦 Requirements
+
+Install the dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -28,50 +28,50 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Nutzung
+## 🚀 Usage
 
 ```bash
-python scan_images.py /pfad/zum/bilderordner
+python greyscan.py /path/to/images
 ```
 
-Beispiel:
+Example:
 
 ```bash
-python scan_images.py ./fotosammlung
+python greyscan.py ./photo_collection
 ```
 
 ---
 
-## 📝 Ausgabe
+## 📝 Output
 
-- Alle verdächtigen Dateien werden in einer Textdatei mit Zeitstempel geloggt, z. B.:
+- All suspicious files are logged in a text file with a timestamp, e.g.:
 
   ```
-  graubalken_log_20250708_131500.txt
+  graybar_log_20250708_131500.txt
   ```
 
 - Format:
 
   ```
-  /pfad/zum/bild.jpg — Grauer Balken bei Zeile 460–480
+  /path/to/image.jpg — Gray bar at line 460–480
   ```
 
 ---
 
-## ⚙️ Konfigurierbare Parameter
+## ⚙️ Configurable Parameters
 
-Diese Parameter sind im Code leicht anpassbar:
+These parameters can be adjusted in the code:
 
-| Parameter         | Bedeutung                                | Standardwert |
-|------------------|-------------------------------------------|--------------|
-| `band_height`     | Höhe der analysierten Bildstreifen       | `20`         |
-| `flatness_thresh`| Max. Helligkeits-Standardabweichung      | `5`          |
-| `brightness_min` | Mindesthelligkeit für "grau"              | `30`         |
-| `brightness_max` | Maximalhelligkeit für "grau"              | `230`        |
+| Parameter         | Meaning                                   | Default |
+|------------------|-------------------------------------------|---------|
+| `band_height`     | Height of the analyzed image bands        | `20`    |
+| `flatness_thresh`| Max. brightness standard deviation        | `5`     |
+| `brightness_min` | Minimum brightness for "gray"             | `30`    |
+| `brightness_max` | Maximum brightness for "gray"             | `230`   |
 
 ---
 
-## 📂 Unterstützte Dateiformate
+## 📂 Supported File Formats
 
 - `.jpg`
 - `.jpeg`
@@ -79,10 +79,10 @@ Diese Parameter sind im Code leicht anpassbar:
 
 ---
 
-## 🔧 Erweiterungsideen (optional)
+## 🔧 Extension Ideas (optional)
 
-- Parallelisierung (Multithreading)
-- YAML-Konfiguration für Thresholds
-- Thumbnails mit Fehler-Markierung
-- Duplikatvergleich per Hash
-- Web-Interface (z. B. Flask-basiert)
+- Parallelization (multithreading)
+- YAML configuration for thresholds
+- Thumbnails with error markings
+- Duplicate comparison via hash
+- Web interface (e.g. Flask based)
