@@ -20,10 +20,10 @@ A band (e.g. 20 pixels high) is considered suspicious when:
 
 ## 📦 Requirements
 
-Install the dependencies:
+Install the dependencies and the package in editable mode:
 
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ---
@@ -31,14 +31,16 @@ pip install -r requirements.txt
 ## 🚀 Usage
 
 ```bash
-python greyscan.py /path/to/images
+greyscan /path/to/images
 ```
 
 Example:
 
 ```bash
-python greyscan.py ./photo_collection
+greyscan ./photo_collection --band-height 30 --flatness-thresh 6 --verbose
 ```
+
+Use `-q/--quiet` to suppress console output of detected files and `-v/--verbose` for additional progress messages.
 
 ---
 
@@ -60,7 +62,7 @@ python greyscan.py ./photo_collection
 
 ## ⚙️ Configurable Parameters
 
-These parameters can be adjusted in the code:
+These parameters can be passed as command-line options or adjusted in the code:
 
 | Parameter         | Meaning                                   | Default |
 |------------------|-------------------------------------------|---------|
